@@ -8,9 +8,10 @@
 #include "c_logging/logger.h"
 #include "c_logging/log_sink.h"
 #include "c_logging/log_sink_console.h"
+#include "c_logging/log_sink_etw.h"
 
-static uint32_t sink_count = 1;
-static LOG_SINK* log_sinks = &console_log_sink;
+static const LOG_SINK* log_sinks[] = { &console_log_sink, &etw_log_sink };
+static uint32_t sink_count = 2;
 
 void logger_log(LOG_LEVEL log_level, const char* format, ...)
 {
@@ -24,7 +25,25 @@ void logger_log(LOG_LEVEL log_level, const char* format, ...)
 
     for (i = 0; i < sink_count; i++)
     {
-        log_sinks[i].log_sink_log(log_level, message, __FILE__, __FUNCTION__, __LINE__);
+        log_sinks[i]->log_sink_log(log_level, NULL, message, __FILE__, __FUNCTION__, __LINE__);
+    }
+
+    va_end(args);
+}
+
+void logger_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* format, ...)
+{
+    uint32_t i;
+    va_list args;
+    va_start(args, format);
+
+    char message[LOG_MAX_MESSAGE_LENGTH];
+
+    vsprintf(message, format, args);
+
+    for (i = 0; i < sink_count; i++)
+    {
+        log_sinks[i]->log_sink_log(log_level, log_context, message, __FILE__, __FUNCTION__, __LINE__);
     }
 
     va_end(args);

@@ -6,7 +6,9 @@
 
 #include "macro_utils/macro_utils.h"
 
-typedef void (*LOG_SINK_LOG_FUNC)(LOG_LEVEL log_level, char* message, const char* file, const char* func, int line);
+#include "c_logging/log_context.h"
+
+typedef void (*LOG_SINK_LOG_FUNC)(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, char* message, const char* file, const char* func, int line);
 
 typedef struct LOG_SINK_TAG
 {

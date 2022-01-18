@@ -72,5 +72,14 @@ int main(void)
     logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
     logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
     logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
-}
 
+    const char* block_id = "pachoo";
+
+    (void)block_id;
+
+    LOG_CONTEXT_DEFINE(log_context,
+        "block_id", block_id);
+
+    /* log with context */
+    logger_log_with_context(LOG_LEVEL_ERROR, &log_context, "some_error with context");
+}

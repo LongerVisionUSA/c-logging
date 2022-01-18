@@ -11,9 +11,11 @@
 
 MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(LOG_LEVEL, LOG_LEVEL_VALUES);
 
-void log_sink_console_log(LOG_LEVEL log_level, const char* message, const char* file, const char* func, int line)
+void log_sink_console_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* message, const char* file, const char* func, int line)
 {
     time_t t = time(NULL);
+
+    (void)log_context;
 
     printf("%s Time:%.24s File:%s Func:%s Line:%d %s\r\n", MU_ENUM_TO_STRING(LOG_LEVEL, log_level), ctime(&t), file, func, line, message);
 }
