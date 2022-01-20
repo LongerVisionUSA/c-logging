@@ -2,17 +2,11 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 set(c_logging_v2_c_files
-    ./src/logger.c
-    ./src/log_sink_console.c
-    ./src/log_sink_etw.c
     )
 
 set(c_logging_v2_h_files
     ./inc/c_logging/logger.h
-    ./inc/c_logging/log_context.h
-    ./inc/c_logging/log_sink.h
     ./inc/c_logging/log_sink_console.h
-    ./inc/c_logging/log_sink_etw.h
     )
 
 FILE(GLOB c_logging_v2_md_files "devdoc/*.md")

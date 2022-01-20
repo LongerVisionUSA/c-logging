@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 #include "c_logging/logger.h"
-#include "c_logging/log_sink.h"
 #include "c_logging/log_sink_console.h"
 #include "c_logging/log_sink_etw.h"
 

@@ -4,8 +4,18 @@
 #ifndef LOG_SINK_ETW_H
 #define LOG_SINK_ETW_H
 
-#include "c_logging/log_sink.h"
+#include "windows.h"
+#include "TraceLoggingProvider.h"
+#include "evntrace.h"
 
-extern const LOG_SINK etw_log_sink;
+#define LOG_SINK_ETW_LOG(format, file, function, line, ...) \
+    TraceLoggingWrite(g_my_component_provider, \
+        "LogError", \
+        TraceLoggingLevel(TRACE_LEVEL_ERROR), \
+        TraceLoggingString(message, "content"), \
+        TraceLoggingString(file, "file"), \
+        TraceLoggingString(func, "func"), \
+        TraceLoggingInt32(line, "line") \
+
 
 #endif /* LOG_SINK_ETW_H */
