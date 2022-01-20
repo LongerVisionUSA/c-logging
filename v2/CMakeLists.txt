@@ -2,6 +2,7 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 set(c_logging_v2_c_files
+    ./src/logger.c
     )
 
 set(c_logging_v2_h_files
