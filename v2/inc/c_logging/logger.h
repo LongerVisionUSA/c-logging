@@ -8,7 +8,16 @@
 
 #include "log_sink_etw.h"
 
-#define LOGGER_LOG(format, ...) \
-    LOG_SINK_ETW_LOG(format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+#define LOG_LEVEL_VALUES \
+    LOG_LEVEL_CRITICAL, \
+    LOG_LEVEL_ERROR, \
+    LOG_LEVEL_WARNING, \
+    LOG_LEVEL_INFO, \
+    LOG_LEVEL_VERBOSE
+
+MU_DEFINE_ENUM(LOG_LEVEL, LOG_LEVEL_VALUES);
+
+#define LOGGER_LOG(level, format, ...) \
+    LOG_SINK_ETW_LOG(level, format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
 
 #endif /* C_LOGGING_H */

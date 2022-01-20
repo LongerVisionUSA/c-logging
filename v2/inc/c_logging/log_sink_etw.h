@@ -8,6 +8,8 @@
 #include "TraceLoggingProvider.h"
 #include "evntrace.h"
 
+extern _tlg_EXTERN_C_CONST TraceLoggingHProvider g_my_component_provider;
+
 #define LOG_SINK_ETW_LOG(format, file, function, line, ...) \
     TraceLoggingWrite(g_my_component_provider, \
         "LogError", \
@@ -15,7 +17,7 @@
         TraceLoggingString(message, "content"), \
         TraceLoggingString(file, "file"), \
         TraceLoggingString(func, "func"), \
-        TraceLoggingInt32(line, "line") \
+        TraceLoggingInt32(line, "line")) \
 
 
 #endif /* LOG_SINK_ETW_H */

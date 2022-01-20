@@ -3,6 +3,7 @@
 
 set(c_logging_v2_c_files
     ./src/logger.c
+    ./src/log_sink_etw.c
     )
 
 set(c_logging_v2_h_files
