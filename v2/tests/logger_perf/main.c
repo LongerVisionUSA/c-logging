@@ -42,7 +42,7 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            logger_log(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
+            LOGGER_LOG(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
         }
 
         iterations += i;

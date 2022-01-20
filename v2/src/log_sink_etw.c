@@ -22,7 +22,7 @@ TRACELOGGING_DEFINE_PROVIDER(
 
 static volatile LONG isETWLoggerRegistered = 0;
 
-static void lazyRegisterEventProvider(void)
+void lazyRegisterEventProvider(void)
 {
     /*lazily init the logger*/
     LONG state;
@@ -45,19 +45,3 @@ static void lazyRegisterEventProvider(void)
         }
     }
 }
-
-void log_sink_etw_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* message, const char* file, const char* func, int line)
-{
-    (void)log_level;
-    (void)log_context;
-    TraceLoggingWrite(g_my_component_provider,
-        "LogError",
-        TraceLoggingLevel(TRACE_LEVEL_ERROR),
-        TraceLoggingString(message, "content"),
-        TraceLoggingString(file, "file"),
-        TraceLoggingString(func, "func"),
-        TraceLoggingInt32(line, "line")
-    );
-}
-
-LOG_SINK etw_log_sink = { log_sink_etw_log };

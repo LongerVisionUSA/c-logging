@@ -7,6 +7,7 @@
 #include "macro_utils/macro_utils.h"
 
 #include "log_sink_etw.h"
+#include "log_sink_console.h"
 
 #define LOG_LEVEL_VALUES \
     LOG_LEVEL_CRITICAL, \
@@ -17,7 +18,14 @@
 
 MU_DEFINE_ENUM(LOG_LEVEL, LOG_LEVEL_VALUES);
 
+#define LOG_CONTEXT_DEFINE(log_context, ...)
+
 #define LOGGER_LOG(level, format, ...) \
-    LOG_SINK_ETW_LOG(level, format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__)
+    LOG_SINK_ETW_LOG(level, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__) \
+    LOG_SINK_CONSOLE_LOG(level, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__)
+
+#define LOGGER_LOG_WITH_CONTEXT(level, log_context, format, ...) \
+    LOG_SINK_ETW_LOG(level, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__) \
+    LOG_SINK_CONSOLE_LOG(level, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__)
 
 #endif /* C_LOGGING_H */

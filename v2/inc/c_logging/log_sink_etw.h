@@ -4,20 +4,33 @@
 #ifndef LOG_SINK_ETW_H
 #define LOG_SINK_ETW_H
 
+#ifndef __cpluplus
+#include <stdio.h>
+#else
+#include <cstdio>
+#endif
+
 #include "windows.h"
 #include "TraceLoggingProvider.h"
 #include "evntrace.h"
 
-extern _tlg_EXTERN_C_CONST TraceLoggingHProvider g_my_component_provider;
+#include "logger.h"
 
-#define LOG_SINK_ETW_LOG(format, file, function, line, ...) \
+extern _tlg_EXTERN_C_CONST TraceLoggingHProvider g_my_component_provider;
+void lazyRegisterEventProvider(void);
+
+#define LOG_SINK_ETW_LOG(level, file, func, line, format, ...) \
+    { \
+    char message[LOG_SIZE_REGULAR]; \
+    lazyRegisterEventProvider(); \
+    sprintf(message, format MU_IFCOMMALOGIC(MU_COUNT_ARG(__VA_ARGS__)) __VA_ARGS__); \
     TraceLoggingWrite(g_my_component_provider, \
         "LogError", \
         TraceLoggingLevel(TRACE_LEVEL_ERROR), \
         TraceLoggingString(message, "content"), \
         TraceLoggingString(file, "file"), \
         TraceLoggingString(func, "func"), \
-        TraceLoggingInt32(line, "line")) \
-
+        TraceLoggingInt32(line, "line")); \
+    }
 
 #endif /* LOG_SINK_ETW_H */
