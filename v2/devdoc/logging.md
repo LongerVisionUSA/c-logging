@@ -34,15 +34,32 @@ For the `ETW` sink there should be a posibility of specifying the provider to us
 
 A console sink shall be supported so that events are printed to the console using `printf`.
 
+## API
+
+```c
+void c_logging_log(LOG_LEVEL log_level, const char* fmt, ...);
+void c_logging_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* fmt, ...);
+```
+
 ## Contextual logging
 
 For each log line the library shall support specifying a context to be added to the log line.
 
 The context shall allow defining pairs of properties that are added to the event when the event is emitted.
 
-## API
+### Context creation from existing values
+
+The library shall support creating a context without allocating any memory:
 
 ```c
-void c_logging_log(LOG_LEVEL log_level, const char* fmt, ...);
-void c_logging_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* fmt, ...);
+#define LOG_CONTEXT_DEFINE(log_context, ...) \
+```
+
+where `...` is a list of pairs of the form (type, value).
+
+Example:
+
+```c
+    LOG_CONTEXT_DEFINE(log_context,
+        THANDLE(RC_STRING), block_id);
 ```
