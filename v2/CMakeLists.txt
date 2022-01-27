@@ -5,6 +5,7 @@ set(c_logging_v2_c_files
     ./src/logger.c
     ./src/log_sink_console.c
     ./src/log_sink_etw.c
+    ./src/log_context.c
     )
 
 set(c_logging_v2_h_files
