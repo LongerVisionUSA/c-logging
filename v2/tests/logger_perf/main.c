@@ -44,7 +44,7 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            logger_log(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
+            LOGGER_LOG(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
         }
 
         iterations += i;
@@ -71,7 +71,7 @@ int main(void)
             LOG_CONTEXT_DEFINE(log_context,
                 "block_id", block_id);
 
-            logger_log_with_context(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
+            LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
         }
 
         iterations += i;
@@ -94,7 +94,7 @@ int main(void)
             LOG_PROPERTY properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "block_id", "pachoo" };
             LOG_CONTEXT_HANDLE log_context = log_context_create(NULL, 1, properties);
 
-            logger_log_with_context(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
+            LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
 
             log_context_destroy(log_context);
         }

@@ -7,6 +7,8 @@
 #include "macro_utils/macro_utils.h"
 
 #include "c_logging/log_context.h"
+#include "c_logging/log_sink_etw.h"
+#include "c_logging/log_sink_console.h"
 
 #define LOG_LEVEL_VALUES \
     LOG_LEVEL_CRITICAL, \
@@ -19,7 +21,11 @@ MU_DEFINE_ENUM(LOG_LEVEL, LOG_LEVEL_VALUES);
 
 #define LOG_MAX_MESSAGE_LENGTH 4096 /*in bytes - a message is not expected to exceed this size in bytes, if it does, only LOG_MAX_MESSAGE_LENGTH characters are retained*/
 
-void logger_log(LOG_LEVEL log_level, const char* format, ...);
-void logger_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* format, ...);
+#define LOGGER_LOG_WITH_CONTEXT(log_level, log_context, format, ...) \
+    LOG_SINK_CONSOLE_LOG_WITH_CONTEXT(log_level, log_context, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__) \
+    LOG_SINK_ETW_LOG_WITH_CONTEXT(log_level, log_context, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__) \
+
+#define LOGGER_LOG(log_level, format, ...) \
+    LOG_SINK_CONSOLE_LOG(log_level, __FILE__, __FUNCTION__, __LINE__, format, __VA_ARGS__) \
 
 #endif /* C_LOGGING_H */
