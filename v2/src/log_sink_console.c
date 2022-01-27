@@ -17,15 +17,18 @@ void log_sink_console_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, c
 
     (void)log_context;
 
-    for (uint32_t i = 0; i < log_context->property_count; i++)
+    if (log_context != NULL)
     {
-        switch (log_context->properties[i].type)
+        for (uint32_t i = 0; i < log_context->property_count; i++)
         {
-        default:
-            break;
-        case LOG_PROPERTY_TYPE_ANSI_STRING:
-            printf("%s=%s", log_context->properties[0].name, (const char*)log_context->properties[0].value);
-            break;
+            switch (log_context->properties[i].type)
+            {
+            default:
+                break;
+            case LOG_PROPERTY_TYPE_ANSI_STRING:
+                printf("%s=%s ", log_context->properties[0].name, (const char*)log_context->properties[0].value);
+                break;
+            }
         }
     }
     printf("%s Time:%.24s File:%s Func:%s Line:%d %s\r\n", MU_ENUM_TO_STRING(LOG_LEVEL, log_level), ctime(&t), file, func, line, message);
