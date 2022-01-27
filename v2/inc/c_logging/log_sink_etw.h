@@ -27,7 +27,7 @@ const TraceLoggingHProvider* lazyRegisterEventProvider(void);
         );                                                                                      \
     }                                                                                           \
 
-#define LOG_SINK_ETW_LOG_WITH_CONTEXT(log_level, log_context, file, function, line, format, ...)\
+#define LOG_SINK_ETW_LOG_WITH_CONTEXT(log_level, log_context_definition, log_context, file, function, line, format, ...)\
     {                                                                                           \
         char message[LOG_MAX_MESSAGE_LENGTH];                                                   \
         const TraceLoggingHProvider* tracelogging_handle = lazyRegisterEventProvider();         \

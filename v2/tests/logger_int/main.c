@@ -73,22 +73,22 @@ int main(void)
     LOGGER_LOG(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
     LOGGER_LOG(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
-    const char* prop_value = "pachoo";
-    const char* parent_prop_value = "pachoo";
-
-#define LOG_PARENT_CONTEXT_PROPERTIES \
-    LOG_PROPERTY_TYPE_ANSI_STRING, "parent_property"
-
-    LOG_CONTEXT_DEFINE(LOG_PARENT_CONTEXT_PROPERTIES, log_parent_context,
-        parent_prop_value);
-
-#define LOG_CONTEXT_PROPERTIES \
-    LOG_PARENT_CONTEXT_PROPERTIES \
-    LOG_PROPERTY_TYPE_ANSI_STRING, "property_name"
-
-    LOG_CONTEXT_DEFINE(log_context, LOG_CONTEXT_PROPERTIES,
-        prop_value);
-
-    /* log with context */
-    LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_ERROR, log_context, "some_error with context");
+//    const char* prop_value = "pachoo";
+//    const char* parent_prop_value = "pachoo";
+//
+//#define LOG_PARENT_CONTEXT_PROPERTIES \
+//    LOG_PROPERTY_TYPE_ANSI_STRING, "parent_property"
+//
+//    LOG_CONTEXT_DEFINE(log_parent_context, LOG_PARENT_CONTEXT_PROPERTIES,
+//        parent_prop_value);
+//
+//#define LOG_CONTEXT_PROPERTIES \
+//    LOG_PARENT_CONTEXT_PROPERTIES \
+//    LOG_PROPERTY_TYPE_ANSI_STRING, "property_name"
+//
+//    LOG_CONTEXT_DEFINE(log_context, LOG_CONTEXT_PROPERTIES,
+//        parent_context, prop_value);
+//
+//    /* log with context */
+//    LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_ERROR, LOG_CONTEXT_PROPERTIES, log_context, "some_error with context");
 }

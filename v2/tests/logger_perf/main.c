@@ -68,10 +68,12 @@ int main(void)
 
             (void)block_id;
 
+#define 
+
             LOG_CONTEXT_DEFINE(log_context,
                 "block_id", block_id);
 
-            LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
+            LOGGER_LOG_WITH_CONTEXT(LOG_LEVEL_CRITICAL, , log_context, "LogCritical: hello world!");
         }
 
         iterations += i;
