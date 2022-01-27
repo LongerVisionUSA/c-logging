@@ -50,6 +50,7 @@ void log_sink_etw_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const
 {
     (void)log_level;
     (void)log_context;
+
     TraceLoggingWrite(g_my_component_provider,
         "LogError",
         TraceLoggingLevel(TRACE_LEVEL_ERROR),
