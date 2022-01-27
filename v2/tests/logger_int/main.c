@@ -81,5 +81,5 @@ int main(void)
         "block_id", block_id);
 
     /* log with context */
-    logger_log_with_context(LOG_LEVEL_ERROR, &log_context, "some_error with context");
+    logger_log_with_context(LOG_LEVEL_ERROR, log_context, "some_error with context");
 }
