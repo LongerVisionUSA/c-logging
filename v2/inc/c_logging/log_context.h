@@ -27,6 +27,7 @@ typedef struct LOG_PROPERTY_TAG
 
 typedef struct LOG_CONTEXT_TAG
 {
+    struct LOG_CONTEXT_TAG* parent_context;
     uint32_t property_count;
     LOG_PROPERTY properties[];
 } LOG_CONTEXT;
@@ -37,8 +38,12 @@ typedef struct LOG_CONTEXT_TAG* LOG_CONTEXT_HANDLE;
     { LOG_PROPERTY_TYPE_ANSI_STRING, name, (void*)value }
 
 #define LOG_CONTEXT_DEFINE(log_context, ...) \
-    LOG_CONTEXT log_context_backing_struct = { MU_DIV2(MU_COUNT_ARG(__VA_ARGS__)), { MU_FOR_EACH_2(LOG_PASTE_PROPERTIES, __VA_ARGS__) } }; \
-    LOG_CONTEXT_HANDLE log_context = &log_context_backing_struct;
+    LOG_CONTEXT MU_C2(backing_struct_, log_context) = { NULL, MU_DIV2(MU_COUNT_ARG(__VA_ARGS__)), { MU_FOR_EACH_2(LOG_PASTE_PROPERTIES, __VA_ARGS__) } }; \
+    LOG_CONTEXT_HANDLE log_context = &MU_C2(backing_struct_, log_context);
+
+#define LOG_CONTEXT_DEFINE_WITH_PARENT(log_context, parent_context, ...) \
+    LOG_CONTEXT MU_C2(backing_struct_, log_context) = { parent_context, MU_DIV2(MU_COUNT_ARG(__VA_ARGS__)), { MU_FOR_EACH_2(LOG_PASTE_PROPERTIES, __VA_ARGS__) } }; \
+    LOG_CONTEXT_HANDLE log_context = &MU_C2(backing_struct_, log_context);
 
 LOG_CONTEXT_HANDLE log_context_create(LOG_CONTEXT_HANDLE source_context, uint32_t property_count, LOG_PROPERTY* properties);
 void log_context_destroy(LOG_CONTEXT_HANDLE log_context);
