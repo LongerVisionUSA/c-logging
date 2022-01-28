@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "macro_utils/macro_utils.h"
 
@@ -73,24 +74,13 @@ int main(void)
     logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
     logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
-    const char* prop_value = "pachoo";
+    char* prop_value = malloc(2);
+    (void)strcpy(prop_value, "a");
 
-    LOG_CONTEXT_DEFINE(log_context,
-        "proerty_name", prop_value);
-
-    /* log with context */
-    logger_log_with_context(LOG_LEVEL_ERROR, log_context, "some_error with context");
-
-    const char* prop_value_2 = "hagauaga";
-
-    LOG_CONTEXT_DEFINE_WITH_PARENT(log_context_2, log_context,
-        "another_property_name", prop_value_2);
-
-    /* log with parent context */
-    logger_log_with_context(LOG_LEVEL_ERROR, log_context_2, "some_error with context");
-
-    LOG_PROPERTY log_properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "proerty_name", (void*)prop_value };
+    LOG_PROPERTY log_properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "property_name", (void*)prop_value };
     LOG_CONTEXT_HANDLE allocated_log_context = log_context_create(NULL, MU_COUNT_ARRAY_ITEMS(log_properties), log_properties);
+
+    free(prop_value);
 
     logger_log_with_context(LOG_LEVEL_ERROR, allocated_log_context, "some_error with context");
 

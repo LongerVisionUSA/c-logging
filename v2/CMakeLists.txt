@@ -6,6 +6,7 @@ set(c_logging_v2_c_files
     ./src/log_sink_console.c
     ./src/log_sink_etw.c
     ./src/log_context.c
+    ./src/log_property_types.c
     )
 
 set(c_logging_v2_h_files
@@ -14,6 +15,8 @@ set(c_logging_v2_h_files
     ./inc/c_logging/log_sink.h
     ./inc/c_logging/log_sink_console.h
     ./inc/c_logging/log_sink_etw.h
+    ./inc/c_logging/log_property_type.h
+    ./inc/c_logging/log_property_types.h
     )
 
 FILE(GLOB c_logging_v2_md_files "devdoc/*.md")
