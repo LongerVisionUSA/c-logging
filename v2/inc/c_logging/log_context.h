@@ -6,31 +6,36 @@
 
 #ifdef __cplusplus
 #include <cstdint>
+#include <cstdio>
 #else
 #include <stdint.h>
+#include <stdio.h>
 #endif
 
 #include "macro_utils/macro_utils.h"
 
-#include "c_logging/log_property_type.h"
-
-typedef struct LOG_PROPERTY_TAG
-{
-    LOG_PROPERTY_TYPE type;
-    const char* name;
-    void* value;
-} LOG_PROPERTY;
-
 typedef struct LOG_CONTEXT_TAG
 {
-    struct LOG_CONTEXT_TAG* parent_context;
-    uint32_t property_count;
-    LOG_PROPERTY properties[];
+    char* context_string;
 } LOG_CONTEXT;
 
 typedef struct LOG_CONTEXT_TAG* LOG_CONTEXT_HANDLE;
 
-LOG_CONTEXT_HANDLE log_context_create(LOG_CONTEXT_HANDLE parent_context, uint32_t property_count, LOG_PROPERTY* properties);
+LOG_CONTEXT_HANDLE log_context_create(LOG_CONTEXT_HANDLE parent_context, const char* context_string);
 void log_context_destroy(LOG_CONTEXT_HANDLE log_context);
+
+#define EXPAND_LOG_CONTEXT_FIELD(field_name, field_PRI, field_values) \
+    chars_written = sprintf(&log_string[pos], "%s=" field_PRI, field_name, field_values); \
+    pos += chars_written; \
+
+#define STRINGIFY_LOG_CONTEXT_FIELD(field_desc) \
+    MU_C2(EXPAND_, field_desc)
+
+#define LOG_CONTEXT_CREATE(log_context, parent_context, ...) \
+    char log_string[LOG_MAX_MESSAGE_LENGTH]; \
+    size_t pos = 0; \
+    size_t chars_written; \
+    MU_FOR_EACH_1(STRINGIFY_LOG_CONTEXT_FIELD, __VA_ARGS__) \
+    LOG_CONTEXT log_context = { log_string };
 
 #endif /* LOG_CONTEXT_H */

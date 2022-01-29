@@ -9,6 +9,7 @@
 #include "c_logging/log_sink.h"
 #include "c_logging/log_sink_console.h"
 #include "c_logging/log_sink_etw.h"
+#include "c_logging/log_context.h"
 
 static const LOG_SINK* log_sinks[] = { &console_log_sink, &etw_log_sink };
 static uint32_t sink_count = 2;

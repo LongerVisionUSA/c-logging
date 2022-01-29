@@ -77,12 +77,9 @@ int main(void)
     char* prop_value = malloc(2);
     (void)strcpy(prop_value, "a");
 
-    LOG_PROPERTY log_properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "property_name", (void*)prop_value };
-    LOG_CONTEXT_HANDLE allocated_log_context = log_context_create(NULL, MU_COUNT_ARRAY_ITEMS(log_properties), log_properties);
+    LOG_CONTEXT_CREATE(log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+
+    logger_log_with_context(LOG_LEVEL_ERROR, &log_context, "some_error with context");
 
     free(prop_value);
-
-    logger_log_with_context(LOG_LEVEL_ERROR, allocated_log_context, "some_error with context");
-
-    log_context_destroy(allocated_log_context);
 }

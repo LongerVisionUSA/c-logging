@@ -7,7 +7,6 @@
 #include "macro_utils/macro_utils.h"
 
 #include "c_logging/log_context.h"
-#include "c_logging/log_property_types.h"
 
 #define LOG_LEVEL_VALUES \
     LOG_LEVEL_CRITICAL, \

@@ -17,12 +17,7 @@ void log_sink_console_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, c
 
     if (log_context != NULL)
     {
-        for (uint32_t i = 0; i < log_context->property_count; i++)
-        {
-            char temp_str[LOG_MAX_MESSAGE_LENGTH];
-            log_context->properties[i].type.to_string_func(log_context->properties[i].value, temp_str, LOG_MAX_MESSAGE_LENGTH);
-            (void)printf("%s=%s ", log_context->properties[0].name, temp_str);
-        }
+        (void)printf("%s", log_context->context_string);
     }
     printf("%s Time:%.24s File:%s Func:%s Line:%d %s\r\n", MU_ENUM_TO_STRING(LOG_LEVEL, log_level), ctime(&t), file, func, line, message);
 }
