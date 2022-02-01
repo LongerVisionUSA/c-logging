@@ -25,17 +25,19 @@ LOG_CONTEXT_HANDLE log_context_create(LOG_CONTEXT_HANDLE parent_context, const c
 void log_context_destroy(LOG_CONTEXT_HANDLE log_context);
 
 #define EXPAND_LOG_CONTEXT_FIELD(field_name, field_PRI, field_values) \
-    chars_written = sprintf(&log_string[pos], "%s=" field_PRI, field_name, field_values); \
+    chars_written = sprintf(pos, "%s=" field_PRI " ", field_name, field_values); \
     pos += chars_written; \
 
 #define STRINGIFY_LOG_CONTEXT_FIELD(field_desc) \
     MU_C2(EXPAND_, field_desc)
 
 #define LOG_CONTEXT_CREATE(log_context, parent_context, ...) \
-    char log_string[LOG_MAX_MESSAGE_LENGTH]; \
-    size_t pos = 0; \
-    size_t chars_written; \
-    MU_FOR_EACH_1(STRINGIFY_LOG_CONTEXT_FIELD, __VA_ARGS__) \
-    LOG_CONTEXT log_context = { log_string };
+    char MU_C2(log_string_, log_context)[LOG_MAX_MESSAGE_LENGTH]; \
+    { \
+        char* pos = MU_C2(log_string_, log_context); \
+        size_t chars_written; \
+        MU_FOR_EACH_1(STRINGIFY_LOG_CONTEXT_FIELD, __VA_ARGS__) \
+    } \
+    LOG_CONTEXT log_context = { MU_C2(log_string_, log_context) };
 
 #endif /* LOG_CONTEXT_H */

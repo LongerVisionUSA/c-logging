@@ -77,8 +77,7 @@ int main(void)
     start_time = timer_global_get_elapsed_us();
     iterations = 0;
 
-    LOG_PROPERTY properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "block_id", "pachoo" };
-    LOG_CONTEXT_HANDLE log_context = log_context_create(NULL, 1, properties);
+    LOG_CONTEXT_CREATE(log_context, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
 
     current_time;
     while ((current_time = timer_global_get_elapsed_us()) - start_time < TEST_TIME * 1000)
@@ -86,13 +85,11 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            logger_log_with_context(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
+            logger_log_with_context(LOG_LEVEL_CRITICAL, &log_context, "LogCritical: hello world!");
         }
 
         iterations += i;
     }
-
-    log_context_destroy(log_context);
 
     v2_results_context_once[PERF_TEST_LOG_CRITICAL].log_count = iterations;
     v2_results_context_once[PERF_TEST_LOG_CRITICAL].time = current_time - start_time;
@@ -107,12 +104,9 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            LOG_PROPERTY local_properties[] = { LOG_PROPERTY_TYPE_ANSI_STRING, "block_id", "pachoo" };
-            LOG_CONTEXT_HANDLE local_log_context = log_context_create(NULL, 1, local_properties);
+            LOG_CONTEXT_CREATE(log_context_2, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
 
-            logger_log_with_context(LOG_LEVEL_CRITICAL, log_context, "LogCritical: hello world!");
-
-            log_context_destroy(local_log_context);
+            logger_log_with_context(LOG_LEVEL_CRITICAL, &log_context_2, "LogCritical: hello world!");
         }
 
         iterations += i;

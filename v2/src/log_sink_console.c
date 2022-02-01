@@ -19,7 +19,7 @@ void log_sink_console_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, c
     {
         (void)printf("%s", log_context->context_string);
     }
-    printf("%s Time:%.24s File:%s Func:%s Line:%d %s\r\n", MU_ENUM_TO_STRING(LOG_LEVEL, log_level), ctime(&t), file, func, line, message);
+    (void)printf("%s Time:%.24s File:%s Func:%s Line:%d %s\r\n", MU_ENUM_TO_STRING(LOG_LEVEL, log_level), ctime(&t), file, func, line, message);
 }
 
 LOG_SINK console_log_sink = { log_sink_console_log };
