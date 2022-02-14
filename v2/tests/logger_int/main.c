@@ -77,9 +77,16 @@ int main(void)
     char* prop_value = malloc(2);
     (void)strcpy(prop_value, "a");
 
-    LOG_CONTEXT_CREATE(log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+    // local stack context
+    LOCAL_LOG_CONTEXT_DEFINE(log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
 
     logger_log_with_context(LOG_LEVEL_ERROR, &log_context, "some_error with context");
+
+    // allocate a context dynamically
+    LOG_CONTEXT_HANDLE dynamically_filled_log_context;
+    LOG_CONTEXT_CREATE(dynamically_filled_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+
+    logger_log_with_context(LOG_LEVEL_ERROR, dynamically_filled_log_context, "some_error with context");
 
     free(prop_value);
 }

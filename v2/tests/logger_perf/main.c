@@ -77,7 +77,7 @@ int main(void)
     start_time = timer_global_get_elapsed_us();
     iterations = 0;
 
-    LOG_CONTEXT_CREATE(log_context, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
+    LOCAL_LOG_CONTEXT_DEFINE(log_context, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
 
     current_time;
     while ((current_time = timer_global_get_elapsed_us()) - start_time < TEST_TIME * 1000)
@@ -104,7 +104,7 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            LOG_CONTEXT_CREATE(log_context_2, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
+            LOCAL_LOG_CONTEXT_DEFINE(log_context_2, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
 
             logger_log_with_context(LOG_LEVEL_CRITICAL, &log_context_2, "LogCritical: hello world!");
         }
