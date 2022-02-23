@@ -91,4 +91,20 @@ int main(void)
     LOG_CONTEXT_DESTROY(dynamically_allocated_log_context);
 
     free(prop_value);
+
+    // chained dynamically allocated context
+
+    LOG_CONTEXT_HANDLE context_1;
+    LOG_CONTEXT_CREATE(context_1, NULL, LOG_CONTEXT_FIELD("name", "%s", "haga"));
+
+    LOG_CONTEXT_HANDLE context_2;
+    LOG_CONTEXT_CREATE(context_2, context_1, LOG_CONTEXT_FIELD("last name", "%s", "uaga"), LOG_CONTEXT_FIELD("age", "%d", 42));
+
+    logger_log(LOG_LEVEL_VERBOSE, context_1, "log context 1 data");
+    logger_log(LOG_LEVEL_VERBOSE, context_2, "log context 2 data");
+
+    LOG_CONTEXT_DESTROY(context_1);
+
+
+    LOG_CONTEXT_DESTROY(context_2);
 }
