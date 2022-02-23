@@ -83,8 +83,8 @@ where `...` is a list of context fields defined using `LOG_CONTEXT_FIELD`.
 Example:
 
 ```c
-    LOG_CONTEXT_CREATE(dynamically_filled_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
-    LOG_CONTEXT_DESTROY(dynamically_filled_log_context);
+    LOG_CONTEXT_CREATE(dynamically_allocated_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+    LOG_CONTEXT_DESTROY(dynamically_allocated_log_context);
 ```
 
 ### Context chaining

@@ -64,7 +64,7 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            logger_log(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
+            logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: hello world!");
         }
 
         iterations += i;
@@ -85,7 +85,7 @@ int main(void)
         uint32_t i;
         for (i = 0; i < 10000; i++)
         {
-            logger_log_with_context(LOG_LEVEL_CRITICAL, &log_context, "LogCritical: hello world!");
+            logger_log(LOG_LEVEL_CRITICAL, &log_context, "LogCritical: hello world!");
         }
 
         iterations += i;
@@ -106,7 +106,7 @@ int main(void)
         {
             LOCAL_LOG_CONTEXT_DEFINE(log_context_2, NULL, LOG_CONTEXT_FIELD("block_id", "%s", "pachoo"));
 
-            logger_log_with_context(LOG_LEVEL_CRITICAL, &log_context_2, "LogCritical: hello world!");
+            logger_log(LOG_LEVEL_CRITICAL, &log_context_2, "LogCritical: hello world!");
         }
 
         iterations += i;

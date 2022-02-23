@@ -19,7 +19,6 @@ MU_DEFINE_ENUM(LOG_LEVEL, LOG_LEVEL_VALUES);
 
 #define LOG_MAX_MESSAGE_LENGTH 4096 /*in bytes - a message is not expected to exceed this size in bytes, if it does, only LOG_MAX_MESSAGE_LENGTH characters are retained*/
 
-void logger_log(LOG_LEVEL log_level, const char* format, ...);
-void logger_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* format, ...);
+void logger_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* format, ...);
 
 #endif /* C_LOGGING_H */

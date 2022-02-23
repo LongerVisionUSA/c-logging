@@ -23,22 +23,22 @@ int main(void)
     really_big_string_doesnt_fit[sizeof(really_big_string_doesnt_fit) - 1] = '\0';
 
     /*LogCritical*/
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: hello world!");
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: a more complicated hello with int=%d.", 42);
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
-    logger_log(LOG_LEVEL_CRITICAL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: hello world!");
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: a more complicated hello with int=%d.", 42);
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
+    logger_log(LOG_LEVEL_CRITICAL, NULL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
     /*LogError*/
-    logger_log(LOG_LEVEL_ERROR, "LogError: hello world!");
-    logger_log(LOG_LEVEL_ERROR, "LogError: a more complicated hello with int=%d.", 42);
-    logger_log(LOG_LEVEL_ERROR, "LogError: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
-    logger_log(LOG_LEVEL_ERROR, "LogError: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
-    logger_log(LOG_LEVEL_ERROR, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
-    logger_log(LOG_LEVEL_ERROR, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
-    logger_log(LOG_LEVEL_ERROR, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogError: hello world!");
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogError: a more complicated hello with int=%d.", 42);
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogError: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogError: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
+    logger_log(LOG_LEVEL_ERROR, NULL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
 //#ifdef _MSC_VER /*linux doesn't have LogLastError*/
 //    /*LogLastError*/
@@ -48,31 +48,31 @@ int main(void)
 //    LogLastError("LogLastError: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
 //#endif
     /*LogWarning*/
-    logger_log(LOG_LEVEL_WARNING, "LogWarning: hello world!");
-    logger_log(LOG_LEVEL_WARNING, "LogWarning: a more complicated hello with int=%d.", 42);
-    logger_log(LOG_LEVEL_WARNING, "LogWarning: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
-    logger_log(LOG_LEVEL_WARNING, "LogWarning: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
-    logger_log(LOG_LEVEL_WARNING, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
-    logger_log(LOG_LEVEL_WARNING, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
-    logger_log(LOG_LEVEL_WARNING, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogWarning: hello world!");
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogWarning: a more complicated hello with int=%d.", 42);
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogWarning: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogWarning: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
+    logger_log(LOG_LEVEL_WARNING, NULL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
     /*LogInfo*/
-    logger_log(LOG_LEVEL_INFO, "LogInfo: hello world!");
-    logger_log(LOG_LEVEL_INFO, "LogInfo: a more complicated hello with int=%d.", 42);
-    logger_log(LOG_LEVEL_INFO, "LogInfo: the most complicated hello with int=%d and a really big string that fits=%s.", 42, really_big_string_fits);
-    logger_log(LOG_LEVEL_INFO, "LogInfo: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
-    logger_log(LOG_LEVEL_INFO, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
-    logger_log(LOG_LEVEL_INFO, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
-    logger_log(LOG_LEVEL_INFO, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
+    logger_log(LOG_LEVEL_INFO, NULL, "LogInfo: hello world!");
+    logger_log(LOG_LEVEL_INFO, NULL, "LogInfo: a more complicated hello with int=%d.", 42);
+    logger_log(LOG_LEVEL_INFO, NULL, "LogInfo: the most complicated hello with int=%d and a really big string that fits=%s.", 42, really_big_string_fits);
+    logger_log(LOG_LEVEL_INFO, NULL, "LogInfo: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
+    logger_log(LOG_LEVEL_INFO, NULL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
+    logger_log(LOG_LEVEL_INFO, NULL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
+    logger_log(LOG_LEVEL_INFO, NULL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
     /*LogVerbose*/
-    logger_log(LOG_LEVEL_VERBOSE, "LogVerbose: hello world!");
-    logger_log(LOG_LEVEL_VERBOSE, "LogVerbose: a more complicated hello with int=%d.", 42);
-    logger_log(LOG_LEVEL_VERBOSE, "LogVerbose: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
-    logger_log(LOG_LEVEL_VERBOSE, "LogVerbose: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
-    logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
-    logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
-    logger_log(LOG_LEVEL_VERBOSE, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogVerbose: hello world!");
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogVerbose: a more complicated hello with int=%d.", 42);
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogVerbose: the most complicated hello with int=%d and a really big string that fits =%s.", 42, really_big_string_fits);
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogVerbose: the most complicated hello with int=%d and a really big string that does not fit=%s.", 42, really_big_string_doesnt_fit);
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogCritical: does PRI_BOOL work? %" PRI_BOOL "", MU_BOOL_VALUE(true) /*answer is yes, it works*/);
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogCritical: does PRI_BOOL work with amazingly out of bounds value? %" PRI_BOOL "", MU_BOOL_VALUE(42));
+    logger_log(LOG_LEVEL_VERBOSE, NULL, "LogCritical: does PRI_BOOL works with false? %" PRI_BOOL "", MU_BOOL_VALUE(false));
 
     char* prop_value = malloc(2);
     (void)strcpy(prop_value, "a");
@@ -80,13 +80,15 @@ int main(void)
     // local stack context
     LOCAL_LOG_CONTEXT_DEFINE(log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
 
-    logger_log_with_context(LOG_LEVEL_ERROR, &log_context, "some_error with context");
+    logger_log(LOG_LEVEL_ERROR, &log_context, "some_error with context");
 
     // allocate a context dynamically
-    LOG_CONTEXT_HANDLE dynamically_filled_log_context;
-    LOG_CONTEXT_CREATE(dynamically_filled_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+    LOG_CONTEXT_HANDLE dynamically_allocated_log_context;
+    LOG_CONTEXT_CREATE(dynamically_allocated_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
 
-    logger_log_with_context(LOG_LEVEL_ERROR, dynamically_filled_log_context, "some_error with context");
+    logger_log(LOG_LEVEL_ERROR, dynamically_allocated_log_context, "some_error with context");
+
+    LOG_CONTEXT_DESTROY(dynamically_allocated_log_context);
 
     free(prop_value);
 }

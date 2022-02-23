@@ -68,4 +68,7 @@ void log_context_destroy(LOG_CONTEXT_HANDLE log_context);
         } \
     } \
 
+#define LOG_CONTEXT_DESTROY(log_context_handle) \
+    
+
 #endif /* LOG_CONTEXT_H */
