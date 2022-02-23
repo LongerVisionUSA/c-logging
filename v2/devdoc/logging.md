@@ -10,19 +10,19 @@ The exposeed API shall allow printf-like formatting.
 
 The following log levels shall be exposed by the library:
 
-- CRITICAL
+- `CRITICAL`
 
-- WARNING
+- `WARNING`
 
-- ERROR
+- `ERROR`
 
-- INFO
+- `INFO`
 
-- VERBOSE
+- `VERBOSE`
 
 ## Sinks
 
-Multiple sinks shall be supported. Setting up which sinks to be used once shall be supported (so that they do not have to be specified every time a `c_logging_log` call is made).
+Multiple sinks shall be supported. Setting up globally which sinks to be used shall be supported (so that they do not have to be specified every time a `c_logging_log` call is made).
 
 ### ETW sink
 
@@ -37,9 +37,14 @@ A console sink shall be supported so that events are printed to the console usin
 ## API
 
 ```c
-void c_logging_log(LOG_LEVEL log_level, const char* fmt, ...);
-void c_logging_log_with_context(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* fmt, ...);
+void logger_log(LOG_LEVEL log_level, LOG_CONTEXT_HANDLE log_context, const char* format, ...);
 ```
+
+`log_context` may be `NULL`. If `log_context` is `NULL`, no context information shall be added to the log line.
+
+`format` shall be a `printf`-like format string.
+
+`...` shall be the variable number of arguments required by `format`.
 
 ## Contextual logging
 
@@ -47,19 +52,41 @@ For each log line the library shall support specifying a context to be added to 
 
 The context shall allow defining pairs of properties that are added to the event when the event is emitted.
 
-### Context creation from existing values
+### Local stack context creation
 
-The library shall support creating a context without allocating any memory:
+The library shall support defining a context using only stack memory, not requiring any memory allocation:
 
 ```c
-#define LOG_CONTEXT_DEFINE(log_context, ...) \
+#define LOCAL_LOG_CONTEXT_DEFINE(log_context, parent_context, ...) \
 ```
 
-where `...` is a list of pairs of the form (type, value).
+where `...` is a list of context fields defined using `LOG_CONTEXT_FIELD`.
 
 Example:
 
 ```c
-    LOG_CONTEXT_DEFINE(log_context,
-        THANDLE(RC_STRING), block_id);
+    LOCAL_LOG_CONTEXT_DEFINE(log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
 ```
+
+### Dynamically allocated context creation
+
+The library shall support creating a dynamically allocated context.
+
+```c
+#define LOG_CONTEXT_CREATE(log_context_handle, parent_context, ...) \
+
+#define LOG_CONTEXT_CREATE(log_context_handle) \
+```
+
+where `...` is a list of context fields defined using `LOG_CONTEXT_FIELD`.
+
+Example:
+
+```c
+    LOG_CONTEXT_CREATE(dynamically_filled_log_context, NULL, LOG_CONTEXT_FIELD("property_name", "%s", MU_P_OR_NULL(prop_value)));
+    LOG_CONTEXT_DESTROY(dynamically_filled_log_context);
+```
+
+### Context chaining
+
+It shall be supported to chain contexts (define a context or create a context dynamically while specifying a parent context to inherit the information from).
