@@ -60,6 +60,11 @@ typedef void(*LOGGER_LOG_GETLASTERROR)(const char* file, const char* func, int l
 #define LogWarning(...)
 #define LogInfo(...)
 #define LogVerbose(...)
+#define LogCriticalWithContext(...)
+#define LogErrorWithContext(...)
+#define LogWarningWithContext(...)
+#define LogInfoWithContext(...)
+#define LogVerboseWithContext(...)
 #define LogLastError(...)
 #define xlogging_get_log_function() NULL
 #define xlogging_set_log_function(...)
@@ -144,6 +149,12 @@ typedef void(*LOGGER_LOG_GETLASTERROR)(const char* file, const char* func, int l
 #ifdef WIN32
 void xlogging_LogErrorWinHTTPWithGetLastErrorAsStringFormatter(int errorMessageID);
 #endif /* WIN32 */
+
+#define LogCriticalWithContext(log_context, FORMAT, ...) LogCritical("%" PRI_LOG_CONTEXT FORMAT, LOG_CONTEXT_VALUES(log_context), __VA_ARGS__)
+#define LogErrorWithContext(log_context, FORMAT, ...) LogError("%" PRI_LOG_CONTEXT FORMAT, LOG_CONTEXT_VALUES(log_context), __VA_ARGS__)
+#define LogWarningWithContext(log_context, FORMAT, ...) LogWarning("%" PRI_LOG_CONTEXT FORMAT, LOG_CONTEXT_VALUES(log_context), __VA_ARGS__)
+#define LogInfoWithContext(log_context, FORMAT, ...) LogInfo("%" PRI_LOG_CONTEXT FORMAT, LOG_CONTEXT_VALUES(log_context), __VA_ARGS__)
+#define LogVerboseWithContext(log_context, FORMAT, ...) LogError("%" PRI_LOG_CONTEXT FORMAT, LOG_CONTEXT_VALUES(log_context), __VA_ARGS__)
 
 #if defined _MSC_VER
 

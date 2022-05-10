@@ -133,6 +133,7 @@ set(c_logging_h_files
     ${LOGGING_H_FILE}
     ${LOGGING_STACKTRACE_H_FILE}
     ./inc/c_logging/xlogging.h
+    ./inc/c_logging/log_context.h
     )
 
 FILE(GLOB c_logging_md_files "devdoc/*.md")
