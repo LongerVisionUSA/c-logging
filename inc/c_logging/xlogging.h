@@ -64,6 +64,11 @@ typedef void(*LOGGER_LOG_GETLASTERROR)(const char* file, const char* func, int l
 #define xlogging_get_log_function() NULL
 #define xlogging_set_log_function(...)
 #define LogErrorWinHTTPWithGetLastErrorAsString(...)
+#define LogCriticalWithContext(...)
+#define LogVerboseWithContext(...)
+#define LogWarningWithContext(...)
+#define LogInfoWithContext(...)
+#define LogErrorWithContext(...)
 #else /* NO_LOGGING */
 
 // In order to make sure that the compiler evaluates the arguments and issues an error if they do not conform to printf
@@ -157,6 +162,12 @@ LOGGER_LOG_GETLASTERROR xlogging_get_log_function_GetLastError(void);
 #define LogInfo(FORMAT, ...) do{LOG(AZ_LOG_INFO, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
 #define LogVerbose(FORMAT, ...) do{LOG(AZ_LOG_VERBOSE, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
 
+#define LogCriticalWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_CRITICAL, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogErrorWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_ERROR, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogWarningWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_WARNING, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogInfoWithContext(log_context, FORMAT, ...) do{LOG(AZ_LOG_INFO, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogVerboseWithContext(log_context, FORMAT, ...) do{LOG(AZ_LOG_VERBOSE, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+
 #define LogErrorWinHTTPWithGetLastErrorAsString(FORMAT, ...) do { \
                 int errorMessageID = GetLastError(); \
                 LogError(FORMAT, ##__VA_ARGS__); \
@@ -169,6 +180,12 @@ LOGGER_LOG_GETLASTERROR xlogging_get_log_function_GetLastError(void);
 #define LogWarning(FORMAT, ...) do{ LOG(AZ_LOG_WARNING, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
 #define LogInfo(FORMAT, ...) do{LOG(AZ_LOG_INFO, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
 #define LogVerbose(FORMAT, ...) do{LOG(AZ_LOG_VERBOSE, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+
+#define LogCriticalWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_CRITICAL, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogErrorWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_ERROR, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogWarningWithContext(log_context, FORMAT, ...) do{ LOG(AZ_LOG_WARNING, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogInfoWithContext(log_context, FORMAT, ...) do{LOG(AZ_LOG_INFO, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
+#define LogVerboseWithContext(log_context, FORMAT, ...) do{LOG(AZ_LOG_VERBOSE, LOG_LINE, FORMAT, ##__VA_ARGS__); }while((void)0,0)
 
 #ifdef WIN32
 // Included when compiling on Windows but not with MSVC, e.g. with MinGW.
