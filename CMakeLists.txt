@@ -18,6 +18,7 @@ endif()
 
 project(c_logging)
 
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 #the following variables are project-wide and can be used with cmake-gui
 option(run_unittests "set run_unittests to ON to run unittests (default is OFF)" OFF)
 option(run_int_tests "set run_int_tests to ON to run integration tests (default is OFF)." OFF)
